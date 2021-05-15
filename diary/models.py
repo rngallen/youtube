@@ -13,11 +13,11 @@ class Entry(models.Model):
         return f"Entry # {self.id}"
 
     class Meta:
-        db_table = 'ENTRY'
+        db_table = "ENTRY"
         managed = True
-        verbose_name = 'Entry'
-        verbose_name_plural = 'Entries'
-        ordering = ['-timestamp']
+        verbose_name = "Entry"
+        verbose_name_plural = "Entries"
+        ordering = ["-timestamp"]
 
     # def get_absolute_url(self):
     #     return reverse("detail", kwargs={"pk": self.pk})

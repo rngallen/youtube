@@ -13,12 +13,11 @@ class City(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'CITY'
+        db_table = "CITY"
         managed = True
-        verbose_name = 'City'
-        verbose_name_plural = 'Cities'
-        ordering = ['-timestamp']
+        verbose_name = "City"
+        verbose_name_plural = "Cities"
+        ordering = ["-timestamp"]
 
     # def get_absolute_url(self):
     #     return reverse("detail", kwargs={"pk": self.pk})
-

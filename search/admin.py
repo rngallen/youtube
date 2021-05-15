@@ -6,14 +6,14 @@ from .models import HttpError, ExceptionError, SuccessRequest
 
 @admin.register(HttpError)
 class HttpErrorAdmin(admin.ModelAdmin):
-    list_display = ['ip_address', 'error_message', 'timestamp']
+    list_display = ["ip_address", "error_message", "timestamp"]
 
 
 @admin.register(ExceptionError)
 class ExceptionErrorAdmin(admin.ModelAdmin):
-    list_display = ['ip_address', 'error_message', 'timestamp']
+    list_display = ["ip_address", "error_message", "timestamp"]
 
 
 @admin.register(SuccessRequest)
 class SuccessRequestAdmin(admin.ModelAdmin):
-    list_display = ['ip_address', 'success_message', 'timestamp','search']
+    list_display = ["ip_address", "success_message", "timestamp", "search"]
