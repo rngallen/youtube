@@ -1,4 +1,6 @@
 import os
+from decouple import config
+from typing import cast
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -6,13 +8,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "p4hq(wv)-*q8tf8%90go%27v&)+_v975oms)ex8%@vci0h3h!c"
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", cast=bool, default=False)
 
 ALLOWED_HOSTS = [
-    "192.168.8.101",
     "localhost",
     "127.0.0.1",
 ]
@@ -25,9 +26,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "search",
-    "diary",
-    "weather",
+    "search.apps.SearchConfig",
+    "diary.apps.DiaryConfig",
+    "weather.apps.WeatherConfig",
 ]
 
 MIDDLEWARE = [
@@ -45,7 +46,9 @@ ROOT_URLCONF = "youtubeapi.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates"),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -107,19 +110,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
-# static files aren't tied to any app
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
-STATIC_ROOT = os.path.join(BASE_DIR, "static_root")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "assets")
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = [
-    os.path.join(BASE_DIR, "media"),
-]
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-YOUTUBE_DATA_API_KEY = "AIzaSyC1m6Yu7-XlUr31LGuWiOWRY6Y5ISOX8_o"
-WEATHER_API_KEY = "f869c579f01748ca2d30e8f9e5990fe1"
-SAGE_API_USER = "API"
-SAGE_API_PASSWORD = "API"
+YOUTUBE_DATA_API_KEY = config("YOUTUBE_DATA_API_KEY")
+WEATHER_API_KEY = config("WEATHER_API_KEY")
+SAGE_API_USER = config("SAGE_API_USER")
+SAGE_API_PASSWORD = config("SAGE_API_PASSWORD")
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
